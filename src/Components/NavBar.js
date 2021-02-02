@@ -33,17 +33,11 @@ const ImgLogo = styled.img`
     width: 50px;
 `;
 
-const Button = styled.button`
-    height: 50px;
-    width: 50px;
-    background-color: #299B01;
+const Login = styled.button`
+    background-color: transparent;
+    border-color: transparent;
     color: white;
-    border: 0px;
-    flex-direction: column;
-`;
-
-const ImgSign = styled.img`
-    width:25px;
+    font-size: 16px;
 `;
 
 export const NavBar = () => (
@@ -52,9 +46,9 @@ export const NavBar = () => (
             <ImgLogo src={logoImg} alt="logo" />
             <H1>MrDonald's</H1>
         </Logo>
-        <Button>
-            <ImgSign src={sign} alt="sign" />
-            войти
-        </Button>
+        <Login>
+            <img src={sign} alt="лого" />
+            <p>войти</p>
+        </Login>
     </NavBarStyled>
-)
+);
