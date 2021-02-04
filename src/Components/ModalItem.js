@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ButtonCheckout } from './ButtonChekout';
 
 const Overlay = styled.div`
     position: fixed;
     display: flex;
-    justyfy-content: center;
+    justify-content: center;
     align-items: center;
     top: 0;
     left: 0;
@@ -16,7 +17,6 @@ const Overlay = styled.div`
 
 const Modal = styled.div`
     position: absolute;
-    left: 30%;
     background-color: #fff;
     width: 600px;
     height: 600px;
@@ -28,27 +28,23 @@ const Banner = styled.div`
     background-image: url(${({ img }) => img});
     background-size: cover;
     background-position: center;
-    margin-bottom:20px;
+    
 `;
 
-const Item = styled.div`
-    padding: 0 30px;
-    font-size: 30px;
-    font-family: Pacifico;
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 200px);
+    padding: 30px;
+`;
+
+const HeaderContent = styled.div` 
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-`;
-
-const Add = styled.button`
-    position: absolute;
-    font-size: 21px;
-    background-color: #299B01;
-    width: 250px;
-    height: 65px;
-    left: 175px;
-    top: 80%;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: Pacifico;
 `;
 
 export const ModalItem = ({ openItem, setOpenItem }) => {
@@ -66,12 +62,15 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
 
             <Modal>
                 <Banner img={openItem.img} />
-                <Item>
-                    <div>{openItem.name}</div>
-                    <div>{openItem.price.toLocaleString('ru-RU',
-                        { style: 'currency', currency: 'RUB' })}</div>
-                </Item>
-                <Add>Добавить</Add>
+                <Content>
+                    <HeaderContent>
+                        <div>{openItem.name}</div>
+                        <div>{openItem.price.toLocaleString('ru-RU',
+                            { style: 'currency', currency: 'RUB' })}</div>
+                    </HeaderContent>
+                    <ButtonCheckout>Добавить</ButtonCheckout>
+                </Content>
+                {/* <Add>Добавить</Add> */}
             </Modal>
 
         </Overlay>
