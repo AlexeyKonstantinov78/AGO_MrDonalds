@@ -1,6 +1,6 @@
 import React from 'react';
 import { GlobalStyle } from './Components/Style/GlobalStyle';
-import { NavBar } from './Components/NavBar';
+import { NavBar } from './Components/NavBar/NavBar';
 import { Menu } from './Components/Menu/Menu';
 import { ModalItem } from './Components/Modal/ModalItem';
 import { Order } from './Components/Order/Order';
