@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from '../Style/ButtonChekout';
 import { OrderListItem } from './OrderListItem';
+import { totalPriceItems } from '../Modal/ModalItem';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -48,20 +49,24 @@ const EmtyList = styled.p`
 `;
 
 export const Order = ({ orders }) => {
+
+    const total = orders.reduce((result, order) => totalPriceItems(order) + result, 0);
+
     return (
         <OrderStyled>
             <OrderTitle>ВАШ ЗАКАЗ</OrderTitle>
             <OrderContent>
                 {orders.length ?
                     <OrderList>
-                        {orders.map(order => <OrderListItem order={order} />)}
+                        {orders.map((order, index) => <OrderListItem key={index} order={order} />)}
                     </OrderList> :
                     <EmtyList>Список заказов пуст</EmtyList>}
             </OrderContent>
             <Total>
                 <span>Итого</span>
                 <span>5</span>
-                <TotalPrice>850 Р</TotalPrice>
+                <TotalPrice>{total.toLocaleString('ru-RU',
+                    { style: 'currency', currency: 'RUB' })}</TotalPrice>
             </Total>
             <ButtonCheckout>Оформить</ButtonCheckout>
         </OrderStyled>

@@ -51,6 +51,16 @@ button {
 }
 
 input, button {
-    font-family: inherit;
+    font: inherit;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 `;
