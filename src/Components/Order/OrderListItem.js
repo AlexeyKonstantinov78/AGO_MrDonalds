@@ -42,11 +42,9 @@ export const OrderListItem = ({ order }) => {
     const topping = order.topping.filter(item => item.checked)
         .map(item => item.name).join(', ');
 
-    console.log(topping);
-
     return (
         <OrderItemStyled>
-            <ItemName>{order.name}</ItemName>
+            <ItemName>{order.name} {order.choice}</ItemName>
             <span>{order.count}</span>
             <ItemPrise>{formatCurrency(totalPriceItems(order))}</ItemPrise>
             <TrashButton />
