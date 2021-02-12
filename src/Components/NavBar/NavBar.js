@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logoImg from '../../image/logo.svg';
-import sign from '../../image/sign.svg';
+import siginImg from '../../image/sign.svg';
 
 const NavBarStyled = styled.header`
     position: fixed;
@@ -65,17 +65,16 @@ export const NavBar = ({ authentication, logIn, logOut }) => (
         </Logo>
         {authentication ?
             <User>
-                <figure>
-                    <img src={sign} alt={authentication.displayName} />
+                <Figure>
+                    <img src={siginImg} alt={authentication.displayName} />
                     <figcaption>{authentication.displayName}</figcaption>
-                </figure>
-                <LogOut title="выйти" onClick={logOut} >X</LogOut>
+                </Figure>
+                <LogOut title="Выйти" onClick={logOut} >X</LogOut>
             </User> :
             <Login onClick={logIn}>
                 <Figure>
-                    <img src={sign} alt="войти" />
+                    <img src={siginImg} alt="войти" />
                     <figcaption>войти</figcaption>
-
                 </Figure>
             </Login>
         }
