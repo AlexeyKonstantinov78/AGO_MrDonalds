@@ -48,7 +48,7 @@ const EmtyList = styled.p`
     text-align: center;
 `;
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn }) => {
 
     const deleteItem = index => {
         const newOrders = [...orders];
@@ -81,7 +81,7 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
                 <span>{totalCounter}</span>
                 <TotalPrice>{formatCurrency(total)}</TotalPrice>
             </Total>
-            <ButtonCheckout>Оформить</ButtonCheckout>
+            <ButtonCheckout onClick={authentication ? '' : logIn}>Оформить</ButtonCheckout>
         </OrderStyled>
     )
 }
