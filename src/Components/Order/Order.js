@@ -69,6 +69,7 @@ export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, f
             email: authentication.email,
             order: newOrder
         });
+        setOrders([]);
     }
 
     const deleteItem = index => {
