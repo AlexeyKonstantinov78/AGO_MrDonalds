@@ -63,10 +63,12 @@ export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, f
 
     const sendOrder = () => {
         const newOrder = orders.map(projection(rulesData));
+        const data = new Date();
 
         dataBase.ref('orders').push().set({
             nameClient: authentication.displayName,
             email: authentication.email,
+            dateOrder: data.getDate() + ":" + (data.getMonth() + 1) + ":" + data.getFullYear() + " " + data.getHours() + ":" + data.getMinutes() + ":" + data.getMinutes(),
             order: newOrder
         });
         setOrders([]);
