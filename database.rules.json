@@ -1,8 +1,10 @@
 {
-  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
-  "rules": {
+ "rules": {
     "orders": {
       ".write": true
+    },
+    "sool": {
+      ".read": true
     }
   }
 }
