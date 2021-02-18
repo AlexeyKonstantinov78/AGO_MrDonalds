@@ -11,6 +11,8 @@ import { useOpenItem } from './Components/Hooks/useOpenItem';
 import { useOrders } from './Components/Hooks/useOrders';
 import { useAuth } from './Components/Hooks/useAuth';
 import { useTitle } from './Components/Hooks/useTitle';
+import { OrderConfirm } from './Components/Order/OrderConfirm';
+import { useOrderConfirm } from './Components/Hooks/useOrderConfirm';
 
 const firebaseConfig = {
   apiKey: "AIzaSyANX64l06cDKMhUKCc0oDRZR0-MbHDmdts",
@@ -29,6 +31,8 @@ function App() {
   const auth = useAuth(firebase.auth);
   const openItem = useOpenItem();
   const orders = useOrders();
+  const orderConfirm = useOrderConfirm();
+
   useTitle(openItem.openItem);
 
   // применим рект патерн JSX спрейт атрибут передать все свойства обекта
@@ -41,11 +45,13 @@ function App() {
         {...orders}
         {...openItem}
         {...auth}
-        firebaseDatabase={firebase.database}
-
+        {...orderConfirm}
       />
       <Menu {...openItem} />
       {openItem.openItem && <ModalItem {...openItem} {...orders} />}
+      {orderConfirm.openOrderConfirm &&
+        <OrderConfirm {...orders} {...auth} {...orderConfirm}
+          firebaseDatabase={firebase.database} />}
     </>
   );
 }

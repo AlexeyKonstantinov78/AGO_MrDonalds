@@ -9,7 +9,7 @@ import { Choices } from './Сhoices';
 import { useToppings } from '../Hooks/useToppings';
 import { useChoices } from '../Hooks/useChoiсes';
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
     position: fixed;
     display: flex;
     justify-content: center;

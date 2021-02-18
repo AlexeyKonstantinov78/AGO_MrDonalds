@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from '../Style/ButtonChekout';
 import { OrderListItem } from './OrderListItem';
-import { totalPriceItems, formatCurrency, projection } from '../Functions/secondaryFunction';
+import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -17,7 +17,7 @@ const OrderStyled = styled.section`
     padding: 20px;
 `;
 
-const OrderTitle = styled.h2`
+export const OrderTitle = styled.h2`
     text-align: center;
     margin-bottom: 30px;
 `;
@@ -30,7 +30,7 @@ const OrderList = styled.ul`
 
 `;
 
-const Total = styled.div`
+export const Total = styled.div`
     display: flex;
     margin-bottom: 30px;
     & span:first-child {
@@ -38,7 +38,7 @@ const Total = styled.div`
     }
 `;
 
-const TotalPrice = styled.span`
+export const TotalPrice = styled.span`
     text-align: right;
     min-width: 65px;
     margin-left: 20px;
@@ -48,31 +48,14 @@ const EmtyList = styled.p`
     text-align: center;
 `;
 
-const rulesData = {
-    name: ['name'],
-    price: ['price'],
-    count: ['count'],
-    topping: ['topping', arr => arr.filter(obj => obj.checked).map(obj => obj.name),
-        arr => arr.length ? arr : 'no toppings'],
-    choice: ['choice', item => item ? item : 'no choices'],
-}
-
-export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, firebaseDatabase }) => {
-    const dataBase = firebaseDatabase();
-
-
-    const sendOrder = () => {
-        const newOrder = orders.map(projection(rulesData));
-        const data = new Date();
-
-        dataBase.ref('orders').push().set({
-            nameClient: authentication.displayName,
-            email: authentication.email,
-            dateOrder: data.getDate() + ":" + (data.getMonth() + 1) + ":" + data.getFullYear() + " " + data.getHours() + ":" + data.getMinutes() + ":" + data.getMinutes(),
-            order: newOrder
-        });
-        setOrders([]);
-    }
+export const Order = ({
+    orders,
+    setOrders,
+    setOpenItem,
+    authentication,
+    logIn,
+    setOpenOrderConfirm
+}) => {
 
     const deleteItem = index => {
         const newOrders = [...orders];
@@ -105,11 +88,13 @@ export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, f
                 <span>{totalCounter}</span>
                 <TotalPrice>{formatCurrency(total)}</TotalPrice>
             </Total>
-            <ButtonCheckout onClick={
-                authentication ? sendOrder
-                    :
-                    logIn}
-            >Оформить</ButtonCheckout>
+            <ButtonCheckout onClick={() => {
+                if (authentication) {
+                    setOpenOrderConfirm(true)
+                } else {
+                    logIn()
+                }
+            }}>Оформить</ButtonCheckout>
         </OrderStyled>
     )
-}
+};
