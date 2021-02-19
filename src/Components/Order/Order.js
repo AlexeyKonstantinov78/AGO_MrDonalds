@@ -78,21 +78,21 @@ export const Order = () => {
                             index={index}
                             setOpenItem={setOpenItem}
                         />)}
+                        <Total>
+                            <span>Итого</span>
+                            <span>{totalCounter}</span>
+                            <TotalPrice>{formatCurrency(total)}</TotalPrice>
+                        </Total>
+                        <ButtonCheckout onClick={() => {
+                            if (authentication) {
+                                setOpenOrderConfirm(true)
+                            } else {
+                                logIn()
+                            }
+                        }}>Оформить</ButtonCheckout>
                     </OrderList> :
                     <EmtyList>Список заказов пуст</EmtyList>}
             </OrderContent>
-            <Total>
-                <span>Итого</span>
-                <span>{totalCounter}</span>
-                <TotalPrice>{formatCurrency(total)}</TotalPrice>
-            </Total>
-            <ButtonCheckout onClick={() => {
-                if (authentication) {
-                    setOpenOrderConfirm(true)
-                } else {
-                    logIn()
-                }
-            }}>Оформить</ButtonCheckout>
         </OrderStyled>
     )
 };
