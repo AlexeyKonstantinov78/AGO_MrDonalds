@@ -33,6 +33,7 @@ function App() {
   const openItem = useOpenItem();
   const orders = useOrders();
   const orderConfirm = useOrderConfirm();
+  const firebaseDatabase = firebase.database;
 
   useTitle(openItem.openItem);
 
@@ -41,21 +42,17 @@ function App() {
   return (
     <Context.Provider value={{
       auth,
-      openItem
+      openItem,
+      orders,
+      orderConfirm,
+      firebaseDatabase
     }}>
       <GlobalStyle />
       <NavBar />
-      <Order
-        {...orders}
-        {...openItem}
-        {...auth}
-        {...orderConfirm}
-      />
+      <Order />
       <Menu />
-      {openItem.openItem && <ModalItem {...openItem} {...orders} />}
-      {orderConfirm.openOrderConfirm &&
-        <OrderConfirm {...orders} {...auth} {...orderConfirm}
-          firebaseDatabase={firebase.database} />}
+      {openItem.openItem && <ModalItem />}
+      {orderConfirm.openOrderConfirm && <OrderConfirm />}
     </Context.Provider>
   );
 }

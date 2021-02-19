@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ButtonCheckout } from '../Style/ButtonChekout';
 import { OrderListItem } from './OrderListItem';
 import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction';
+import { Context } from '../Functions/context';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -48,14 +49,11 @@ const EmtyList = styled.p`
     text-align: center;
 `;
 
-export const Order = ({
-    orders,
-    setOrders,
-    setOpenItem,
-    authentication,
-    logIn,
-    setOpenOrderConfirm
-}) => {
+export const Order = () => {
+    const { auth: { authentication, logIn } } = useContext(Context);
+    const { openItem: { setOpenItem } } = useContext(Context);
+    const { orders: { orders, setOrders } } = useContext(Context);
+    const { orderConfirm: { setOpenOrderConfirm } } = useContext(Context);
 
     const deleteItem = index => {
         const newOrders = [...orders];

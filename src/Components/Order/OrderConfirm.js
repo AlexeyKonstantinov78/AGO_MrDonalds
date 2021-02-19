@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Overlay } from '../Modal/ModalItem';
 import { OrderTitle, Total, TotalPrice } from './Order';
 import { ButtonCheckout } from '../Style/ButtonChekout';
 import { totalPriceItems, formatCurrency, projection } from '../Functions/secondaryFunction';
+import { Context } from '../Functions/context';
 
 const Modal = styled.div`
     background-color: white;
@@ -38,12 +39,11 @@ const sendOrder = (dataBase, orders, authentication) => {
 
 }
 
-export const OrderConfirm = ({
-    orders, setOrders,
-    authentication,
-    setOpenOrderConfirm,
-    firebaseDatabase
-}) => {
+export const OrderConfirm = () => {
+    const { firebaseDatabase } = useContext(Context);
+    const { orders: { orders, setOrders } } = useContext(Context);
+    const { auth: { authentication } } = useContext(Context);
+    const { orderConfirm: { setOpenOrderConfirm } } = useContext(Context);
     const dataBase = firebaseDatabase();
     const total = orders.reduce((result, order) => totalPriceItems(order) + result, 0);
 
