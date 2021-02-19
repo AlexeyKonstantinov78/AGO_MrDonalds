@@ -32,10 +32,11 @@ const EmtyList = styled.p`
 `;
 
 export const Order = () => {
-    const { auth: { authentication, logIn } } = useContext(Context);
-    const { openItem: { setOpenItem } } = useContext(Context);
-    const { orders: { orders, setOrders } } = useContext(Context);
-    const { orderConfirm: { setOpenOrderConfirm } } = useContext(Context);
+    const {
+        auth: { authentication, logIn },
+        orders: { orders, setOrders },
+        orderConfirm: { setOpenOrderConfirm },
+    } = useContext(Context);
 
     const deleteItem = index => {
         const newOrders = [...orders];
@@ -58,23 +59,26 @@ export const Order = () => {
                             order={order}
                             deleteItem={deleteItem}
                             index={index}
-                            setOpenItem={setOpenItem}
                         />)}
-                        <Total>
-                            <span>Итого</span>
-                            <span>{totalCounter}</span>
-                            <TotalPrice>{formatCurrency(total)}</TotalPrice>
-                        </Total>
-                        <ButtonCheckout onClick={() => {
-                            if (authentication) {
-                                setOpenOrderConfirm(true)
-                            } else {
-                                logIn()
-                            }
-                        }}>Оформить</ButtonCheckout>
                     </OrderList> :
                     <EmtyList>Список заказов пуст</EmtyList>}
             </OrderContent>
+            {orders.length ?
+                <>
+                    <Total>
+                        <span>Итого</span>
+                        <span>{totalCounter}</span>
+                        <TotalPrice>{formatCurrency(total)}</TotalPrice>
+                    </Total>
+                    <ButtonCheckout onClick={() => {
+                        if (authentication) {
+                            setOpenOrderConfirm(true)
+                        } else {
+                            logIn()
+                        }
+                    }}>Оформить</ButtonCheckout>
+                </> : null
+            }
         </OrderStyled>
     )
 };
