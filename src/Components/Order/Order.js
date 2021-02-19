@@ -4,6 +4,7 @@ import { ButtonCheckout } from '../Style/ButtonChekout';
 import { OrderListItem } from './OrderListItem';
 import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction';
 import { Context } from '../Functions/context';
+import { OrderTitle, Total, TotalPrice } from '../Style/GlobalStyle';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -18,31 +19,12 @@ const OrderStyled = styled.section`
     padding: 20px;
 `;
 
-export const OrderTitle = styled.h2`
-    text-align: center;
-    margin-bottom: 30px;
-`;
-
 const OrderContent = styled.div`
     flex-grow: 1;
 `;
 
 const OrderList = styled.ul`
 
-`;
-
-export const Total = styled.div`
-    display: flex;
-    margin-bottom: 30px;
-    & span:first-child {
-        flex-grow: 1;
-    }
-`;
-
-export const TotalPrice = styled.span`
-    text-align: right;
-    min-width: 65px;
-    margin-left: 20px;
 `;
 
 const EmtyList = styled.p`
