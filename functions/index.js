@@ -28,10 +28,13 @@ const sendOrderEmail = data => {
         html: `
             <div>
                 <h2>Добрый день ${data.nameClient}</h2>
-                <h3>Ваш заказ:</h3>
+                <h3>Ваш заказ от : ${data.dataOrder}</h3>
                 <ul>
-                    ${data.order.map(({ name, count, price }) => (
-            `<li>${name} - ${count}шт., цена ${price * count} руб.</li>`)
+                    ${data.order.map(({ name, count, price, choice, topping }) => (
+            `<li>${name} - ${count}шт., цена ${price * count} руб.</li>
+            <div>${(choice !== 'no choices') ? choice : ''}</div>
+            <div>${(topping !== 'no toppings') ? topping.map(topping => topping) : ''}</div>
+            `)
         )}
                 </ul>
                 <p>Итого: ${data.order.reduce((sum, item) => sum + (item.price * item.count), 0)} руб.</p>
